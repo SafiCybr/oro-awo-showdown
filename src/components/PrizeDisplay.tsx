@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { toast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
+import { RotateCcw } from "lucide-react";
 
 const PrizeDisplay = () => {
   const prizes = [100000, 50000, 40000, 30000, 20000, 10000, 8000, 6000, 4000, 2000, 1000];
@@ -34,6 +36,21 @@ const PrizeDisplay = () => {
     }
   };
 
+  const handleReset = () => {
+    if (currentPrizeIndex !== 0) {
+      setCurrentPrizeIndex(0);
+      setAnimating(true);
+      
+      toast({
+        title: "Prize Reset!",
+        description: `New contestant! Prize amount reset to: ${formatPrize(prizes[0])}`,
+        duration: 2000,
+      });
+      
+      setTimeout(() => setAnimating(false), 500);
+    }
+  };
+
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     
@@ -60,7 +77,17 @@ const PrizeDisplay = () => {
         </div>
       </div>
       
-      <div className="mt-12 w-full max-w-md">
+      <div className="mt-8 mb-8">
+        <Button 
+          onClick={handleReset}
+          variant="outline" 
+          className="bg-amber-100 text-amber-900 border-2 border-amber-600 hover:bg-amber-200 font-bold text-lg px-8 py-6"
+        >
+          <RotateCcw className="mr-2" /> Reset for New Contestant
+        </Button>
+      </div>
+      
+      <div className="mt-4 w-full max-w-md">
         <div className="space-y-2">
           {prizes.map((prize, index) => (
             <div 
