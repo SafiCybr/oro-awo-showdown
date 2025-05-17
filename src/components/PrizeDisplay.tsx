@@ -54,12 +54,7 @@ const PrizeDisplay = () => {
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     
-    // Instruction toast
-    toast({
-      title: "Game Instructions",
-      description: "Press the DOWN ARROW key to decrease the prize amount",
-      duration: 5000,
-    });
+    // Removed the instruction toast from here
     
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
